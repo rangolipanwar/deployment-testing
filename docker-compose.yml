@@ -1,0 +1,19 @@
+version: '3.8'
+
+networks:
+  coolify:
+    external: true
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    deploy:
+      replicas: 3
+    networks:
+      - coolify
+    restart: always
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.deployment-testing-service.loadbalancer.server.port=3000"
