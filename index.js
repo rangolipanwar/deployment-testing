@@ -12,7 +12,7 @@ const serverStartTime = new Date();
 app.get('/', (req, res) => {
   const hostname = os.hostname();
   res.json({
-    message: 'Welcome to the Multi-Instance Deployment Test API!',
+    message: 'Welcome to the Multi-Instance Deployment!',
     served_by: hostname,
     serverStartTime: serverStartTime.toISOString(),
     timestamp: new Date().toISOString()
@@ -24,9 +24,11 @@ app.get('/health-check', (req, res) => {
     uptime: process.uptime(),
     served_by: os.hostname(),
     serverStartTime: serverStartTime.toISOString(),
+    commit_id: process.env.SOURCE_COMMIT || 'unknown',
     timestamp: new Date().toISOString()
   });
 });
+
 
 app.get('/api/data', (req, res) => {
   res.json({

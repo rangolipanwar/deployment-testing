@@ -1,6 +1,9 @@
 FROM node:18-alpine AS builder
 
 WORKDIR /app
+ARG SOURCE_COMMIT
+ENV SOURCE_COMMIT=${SOURCE_COMMIT}
+
 
 COPY package.json ./
 
