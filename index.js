@@ -6,20 +6,24 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
+// Store server start time when app starts
+const serverStartTime = new Date();
+
 app.get('/', (req, res) => {
   const hostname = os.hostname();
   res.json({
     message: 'Welcome to the Multi-Instance Deployment Test API!',
     served_by: hostname,
+    serverStartTime: serverStartTime.toISOString(),
     timestamp: new Date().toISOString()
   });
 });
 
 app.get('/health-check', (req, res) => {
   res.status(200).json({
-    status: 'ok',
     uptime: process.uptime(),
     served_by: os.hostname(),
+    serverStartTime: serverStartTime.toISOString(),
     timestamp: new Date().toISOString()
   });
 });
