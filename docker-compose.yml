@@ -1,9 +1,7 @@
 version: '3.8'
-
 networks:
   coolify:
     external: true
-
 services:
   app:
     build:
@@ -15,5 +13,9 @@ services:
       - coolify
     restart: always
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.services.deployment-testing-service.loadbalancer.server.port=3000"
+      - traefik.enable=true
+      - traefik.http.routers.deployment-testing.rule=Host(\`"test.intellsys.in\`")
+      - traefik.http.services.deployment-testing-service.loadbalancer.server.port=3000
+      - coolify.managed=true
+      - coolify.applicationId=19
+      - coolify.type=application
