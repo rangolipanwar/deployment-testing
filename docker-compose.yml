@@ -11,11 +11,10 @@ services:
       replicas: 3
     networks:
       - coolify
-    restart: always
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.deployment-testing.rule=Host(\`"test.intellsys.in\`")
-      - traefik.http.services.deployment-testing-service.loadbalancer.server.port=3000
-      - coolify.managed=true
-      - coolify.applicationId=19
-      - coolify.type=application
+      - "traefik.enable=true"
+      - "traefik.http.routers.deployment-testing-service.rule=Host(`test.intellsys.in`)"
+      - "traefik.http.services.deployment-testing-service.loadbalancer.server.port=3000"
+      - "coolify.managed=true"
+      - "coolify.applicationId=19"
+      - "coolify.type=application"
