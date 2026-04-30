@@ -1,19 +1,13 @@
 FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package.json ./
+RUN npm install
+COPY index.js ./
+FROM node:18-alpine
 
 WORKDIR /app
 ARG SOURCE_COMMIT
 ENV SOURCE_COMMIT=${SOURCE_COMMIT}
-
-
-COPY package.json ./
-
-RUN npm install
-
-COPY index.js ./
-
-FROM node:18-alpine
-
-WORKDIR /app
 
 COPY --from=builder /app /app
 
